@@ -1,12 +1,23 @@
 import express from "express";
 import NotesRoutes from "./routes/NotesRoutes.js"
+import { connectDB } from "./config/db.js";
+import dotenv from "dotenv"
 
-const app = express()
+dotenv.config();
+
+console.log(process.env.MONGO_URI)
+
+const app = express();
+const PORT = process.env.PORT || 5001
+
+connectDB()
 
 app.use("/api/notes", NotesRoutes)
 
 
 
-app.listen(5001, ()=> {
-    console.log("Server started on PORT: 5001")
+app.listen(PORT, ()=> {
+    console.log("Server started on PORT: ", PORT)
 })
+
+// 
